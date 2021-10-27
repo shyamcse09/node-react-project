@@ -1,11 +1,12 @@
 import './App.css';
-import {React, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 function App() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [active, setActive] = useState('');
+  const [emp, setEmp] = useState([]);
 
   const addEmployee = () => {
     axios
@@ -18,14 +19,14 @@ function App() {
         console.log(response);
       });
   };
-  const getEmployee = () => {
+
+  useEffect(() =>{
     axios
       .get('http://localhost:3001/')
       .then((res) => {
-        console.log('All data');
+        setEmp(res.data);
       });
-
-  };
+  }, []);
 
   return (
     <div className="App">
@@ -54,8 +55,26 @@ function App() {
             }}/>
         </div>
         <button onClick={addEmployee}>Add Employee</button>
-        <button onClick={getEmployee}>Get Employee</button>
       </form>
+      All Data :
+      {emp.map((data, index) => {
+        return (
+          <div className="row" key={index}>
+            <div className="col">
+              {data.id}
+            </div>
+            <div className="col">
+              {data.name}
+            </div>
+            <div className="col">
+              {data.email}
+            </div>
+            <div className="col">
+              {data.active}
+            </div>
+          </div>
+        );
+      })};
     </div>
   );
 }

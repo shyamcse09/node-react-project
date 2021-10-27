@@ -10,11 +10,11 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json()) 
 
 // Insert Entry
-app.get("/", (req, res)=> {
+app.get("/", cors(), async (req, res)=> {
   sql.query("SELECT * FROM customers", (err, result) =>{
     if(err) throw err
-    res.json({ data: result })
-  })
+    res.json(result)
+  })  
 }) 
 
 // Fetch Entry
