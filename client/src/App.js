@@ -21,8 +21,8 @@ function App() {
   const getEmployee = () => {
     axios
       .get('http://localhost:3001/')
-      .then((res) =>{
-        console.log(res.data);
+      .then((res) => {
+        console.log('All data');
       });
 
   };

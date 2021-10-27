@@ -13,7 +13,7 @@ app.use(express.json())
 app.get("/", (req, res)=> {
   sql.query("SELECT * FROM customers", (err, result) =>{
     if(err) throw err
-    res.send(result)
+    res.json({ data: result })
   })
 }) 
 
