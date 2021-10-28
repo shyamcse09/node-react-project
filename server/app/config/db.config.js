@@ -1,13 +1,28 @@
+const oracledb = require('oracledb');
+try {
+  oracledb.initOracleClient({libDir: 'D:\\Users\\smonda\\Sites\\instantclient_21_3'});
+} catch (err) {
+  console.error('Whoops!');
+  console.error(err);
+  process.exit(1);
+}
+
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "root",
-  DBNAME: "customer",
-  dialect: "mysql",
-  pool : {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  }
+  user          : process.env.NODE_ORACLEDB_USER || "hr",
+
+  // Get the password from the environment variable
+  // NODE_ORACLEDB_PASSWORD.  The password could also be a hard coded
+  // string (not recommended), or it could be prompted for.
+  // Alternatively use External Authentication so that no password is
+  // needed.
+  password      : process.env.NODE_ORACLEDB_PASSWORD,
+
+  // For information on connection strings see:
+  // https://oracle.github.io/node-oracledb/doc/api.html#connectionstrings
+  connectString : process.env.NODE_ORACLEDB_CONNECTIONSTRING || "localhost/orclpdb1",
+
+  // Setting externalAuth is optional.  It defaults to false.  See:
+  // https://oracle.github.io/node-oracledb/doc/api.html#extauth
+  externalAuth  : process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false
 };
+
