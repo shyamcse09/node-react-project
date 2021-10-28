@@ -18,7 +18,7 @@ app.get("/", cors(), async (req, res)=> {
 }) 
 
 // Fetch Entry
-app.post("/create", (req, res) => {
+app.post("/create", cors(), async (req, res) => {
   const data = {
     name : req.body.name,
     email : req.body.email,
@@ -31,6 +31,7 @@ app.post("/create", (req, res) => {
       return
     }
     else {
+      console.log(result)
       res.send(result)
       //console.log("created customer: ", { id: result.id, ...data });
     }
