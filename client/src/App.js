@@ -7,18 +7,31 @@ function App() {
   const [email, setEmail] = useState('');
   const [active, setActive] = useState('');
   const [emp, setEmp] = useState([]);
+  const [inseredId, setInsert] = useState('');
+  const [rowNumber, setRow] = useState('');
 
-  const addEmployee = () => {
-    axios
-      .post('http://localhost:3001/create', {
-        name: name,
-        email: email,
-        active: active
-      })
-      .then((response) => {
-        console.log(response);
-      });
+  const addEmployee = async (e) => {
+    e.preventDefault();
+    setInsert(true);
   };
+
+  useEffect(() => {
+    console.log('i should come in render');
+    if (inseredId) {
+      console.log('i should not come in render');
+      axios
+        .post('http://localhost:3001/create', {
+          name: name,
+          email: email,
+          active: active
+        })
+        .then((response) => {
+          setRow(response.data);
+          console.log(rowNumber);
+        });
+      setInsert(false);
+    }
+  }, [inseredId]);
 
   useEffect(() =>{
     axios
@@ -26,7 +39,7 @@ function App() {
       .then((res) => {
         setEmp(res.data);
       });
-  }, []);
+  }, [inseredId]);
 
   return (
     <div className="App">
@@ -56,6 +69,7 @@ function App() {
             }}/>
         </div>
         <button onClick={addEmployee}>Add Employee</button>
+        New Row addedd - {rowNumber.insertId}
       </form>
       All Data :
       {emp.map((data, index) => {
