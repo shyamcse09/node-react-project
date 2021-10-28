@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const app = express()
-const sql = require("./app/models/db.js")
+//const sql = require("./app/models/db.js")
 
 app.use(cors())
 
@@ -9,6 +9,7 @@ app.use(express.urlencoded({extended: true}));
 // To parse the incoming requests with JSON payloads
 app.use(express.json()) 
 
+/*
 // Insert Entry
 app.get("/", (req, res)=> {
   sql.query("SELECT * FROM customers", (err, result) =>{
@@ -24,7 +25,6 @@ app.post("/create", (req, res) => {
     email : req.body.email,
     active : req.body.active
   }
-  console.log(data)
   sql.query("INSERT INTO customers SET ?", data, (err, result) => {
     if(err) {
       console.log("error: ", err)
@@ -36,7 +36,7 @@ app.post("/create", (req, res) => {
     }
   })
 })
-
+*/
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () =>{
   console.log(`Listning to port ${PORT}.`)
