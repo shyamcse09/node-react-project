@@ -1,16 +1,14 @@
-const mysql = require("mysql2")
-const dbConfig = require("../config/db.config.js")
+const oracledb = require('oracledb');
+const dbConfig= require('./app/config/db.config.js')
+process.env.ORA_SDTZ = 'UTC';
+const fs = require('fs');
 
-/*const connection = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DBNAME
-})
-
-connection.connect(error =>{
-  if(error) throw error
-  console.log("DB connection happend")
-})*/
-
-module.exports
+let libPath;
+if (process.platform === 'win32') {           // Windows
+  libPath = 'D:\\Users\\smonda\\Sites\\instantclient_21_3';
+} else if (process.platform === 'darwin') {   // macOS
+  libPath = process.env.HOME + '/Downloads/instantclient_19_8';
+}
+if (libPath && fs.existsSync(libPath)) {
+  oracledb.initOracleClient({ libDir: libPath });
+}

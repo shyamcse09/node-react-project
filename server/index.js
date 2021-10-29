@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const app = express()
-//const sql = require("./app/models/db.js")
+const sql = require("./app/models/db.js")
 
 app.use(cors())
 
@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended: true}));
 // To parse the incoming requests with JSON payloads
 app.use(express.json()) 
 
-/*
+
 // Insert Entry
 app.get("/", cors(), async (req, res)=> {
   sql.query("SELECT * FROM customers", (err, result) =>{
@@ -31,13 +31,12 @@ app.post("/create", cors(), async (req, res) => {
       return
     }
     else {
-      console.log(result)
       res.send(result)
       //console.log("created customer: ", { id: result.id, ...data });
     }
   })
 })
-*/
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () =>{
   console.log(`Listning to port ${PORT}.`)
