@@ -49,6 +49,7 @@ function App() {
               setName(event.target.value);
             }}
           />
+          {name}
         </div>
         <div>
           <label> Email: </label>

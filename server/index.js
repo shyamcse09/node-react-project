@@ -9,6 +9,7 @@ app.use(express.urlencoded({extended: true}));
 // To parse the incoming requests with JSON payloads
 app.use(express.json()) 
 
+
 // Insert Entry
 app.get("/", cors(), async (req, res)=> {
   sql.query("SELECT * FROM customers", (err, result) =>{
