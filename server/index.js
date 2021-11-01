@@ -24,14 +24,12 @@ app.post("/create", cors(), async (req, res) => {
     email : req.body.email,
     active : req.body.active
   }
-  console.log(data)
   sql.query("INSERT INTO customers SET ?", data, (err, result) => {
     if(err) {
       console.log("error: ", err)
       return
     }
     else {
-      console.log(result)
       res.send(result)
       //console.log("created customer: ", { id: result.id, ...data });
     }

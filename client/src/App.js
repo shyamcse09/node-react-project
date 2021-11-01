@@ -16,9 +16,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('i should come in render');
     if (inseredId) {
-      console.log('i should not come in render');
       axios
         .post('http://localhost:3001/create', {
           name: name,
@@ -27,7 +25,6 @@ function App() {
         })
         .then((response) => {
           setRow(response.data);
-          console.log(rowNumber);
         });
       setInsert(false);
     }
